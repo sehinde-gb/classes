@@ -8,6 +8,8 @@ namespace classes
         public string Owner { get; set; }
         public decimal Balance { get; }
 
+        private static int accountNumberSeed = 1234567890;
+
         public void MakeDeposit(decimal amount, DateTime date, string note)
         {
         }
@@ -20,6 +22,8 @@ namespace classes
         {
             this.Owner = name;
             this.Balance = initialBalance;
+            this.Number = accountNumberSeed.ToString();
+            accountNumberSeed++;
         }
     }
 
