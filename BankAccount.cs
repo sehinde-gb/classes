@@ -50,13 +50,30 @@ namespace classes
             allTransactions.Add(withdrawal);
         }
 
+        public string GetAccountHistory()
+        {
+            var report = new System.Text.StringBuilder();
+
+            decimal balance = 0;
+            report.AppendLine("Date\t\tAmount\tBalance\tNote");
+
+            foreach (var item in allTransactions)
+            {
+                balance += item.Amount;
+                report.AppendLine($"{item.Date.ToShortDateString()}\t{item.Amount}\t{balance}\t{item.Notes}");
+                
+            }
+
+            return report.ToString();
+        }
+
         public BankAccount(string name, decimal initialBalance)
         {
             this.Number = accountNumberSeed.ToString();
             accountNumberSeed++;
 
             this.Owner = name;
-            //this.Balance = initialBalance;
+            
            
             MakeDeposit(initialBalance, DateTime.Now, "Initial balance");
         }
